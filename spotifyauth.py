@@ -1,0 +1,44 @@
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+import requests
+# https://github.com/spotipy-dev/spotipy/blob/2.22.1/TUTORIAL.md
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="",
+                                               client_secret="",
+                                               redirect_uri="http://example.com",
+                                               scope="playlist-modify-private"))
+user_id = "1124705280"
+taylor_uri = 'spotify:artist:06HL4z0CvFAxyc27GXpf02'
+endpoint = "https://api.spotify.com/v1/users/{user_id}/playlists"
+
+header = {"Authorization": "Bearer "}
+
+def artist_alubums():
+    results = sp.artist_albums(taylor_uri, album_type='album')
+    albums = results['items']
+    while results['next']:
+        results = sp.next(results)
+        albums.extend(results['items'])
+
+    for album in albums:
+        print(album['name'])
+
+# user id is required in the next steps
+def get_user_id():
+    endpoint = "https://api.spotify.com/v1/me"
+    response = requests.get(url=endpoint, headers=header)
+    response.raise_for_status
+    print(response.json())
+
+
+def create_playlist():
+    body = {
+    "name": "New Playlist",
+    "description": "New playlist description",
+    "public": "false"
+}
+    response = requests.post(url=endpoint, json=body, headers=header)
+    response.raise_for_status
+    print(response)
+    
+
+create_playlist()
