@@ -37,8 +37,15 @@ def create_playlist():
     "public": "false"
 }
     response = requests.post(url=endpoint, json=body, headers=header)
-    response.raise_for_status
+    response.aise_for_status
     print(response)
-    
 
-create_playlist()
+def read_cache():
+    print(sp.current_user_top_tracks)
+    
+    with open('.cache') as cache:
+       e_cache = eval(cache.read())
+       print(e_cache['access_token'])
+
+
+read_cache()
