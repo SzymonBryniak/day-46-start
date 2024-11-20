@@ -1,6 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import requests
+import spotifydev
 # https://github.com/spotipy-dev/spotipy/blob/2.22.1/TUTORIAL.md
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="",
                                                client_secret="",
@@ -22,37 +23,30 @@ def artist_alubums():
     for album in albums:
         print(album['name'])
 
-def create_playlist():
-    
-    urn = 'spotify:artist:3jOstUTkEu2JkjvRdBA5Gu'
-    print(sp.user_playlist_create(user_id, "spotip pl", public=True, collaborative=False, description='test spotipy playlist'))
-
-def get_test():
-    print(sp.user(user_id))
-
-get_test()
-
-
-# user id is required in the next steps
 def get_user_id():
     endpoint = "https://api.spotify.com/v1/me"
     response = requests.get(url=endpoint, headers=header)
     response.raise_for_status
     print(response.json())
 
-get_test()
 def create_playlist():
-    body = {
-    "name": "New Playlist",
-    "description": "New playlist description",
-    "public": "false"
-}
-    response = requests.post(url=endpoint, json=body, headers=header)
-    response.aise_for_status
-    print(response)
-
-
     
+    urn = 'spotify:artist:3jOstUTkEu2JkjvRdBA5Gu'
+    print(sp.user_playlist_create(user_id, "spotip pl", public=True, collaborative=False, description='test spotipy playlist'))
+
+def add_tracks():
+    tracks = spotifydev.get_tracks("Disturbia")
+    sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",tracks, position=None )
+
+add_tracks()
+
+def get_test():
+    for i in sp.current_user_playlists(limit=50, offset=0)['items']:
+        print(i)
+    print(sp.playlist("765JkJ9MWbmuPIS3xthnOl", fields=None, market=None, additional_types=('track',)))
+
+# user id is required in the next steps
+
 def read_cache():
     print(sp.current_user_top_tracks)
     
