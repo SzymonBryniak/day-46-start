@@ -13,7 +13,31 @@ def get_auth():
     "client_secret":""
   }
   response = requests.post(url="https://accounts.spotify.com/api/token", headers=header, data=params)
-  print(response.json())
+  # print(response.json())
   return response.json()['access_token']
 
-get_auth()
+
+
+def get_tracks(song):
+  # curl --request GET \
+  # --url 'https://api.spotify.com/v1/search?q=Get+Ur+Freak+On&type=track&limit=1' \
+  # --header 'Authorization: Bearer 1POdFZRZbvb...qqillRxMr2z'
+  token = get_auth()
+  endpoint = 'https://api.spotify.com/v1/search'
+  header = {
+    "Authorization": f"Bearer {token}"
+  }
+
+  params = {
+    "q": song,
+    "type": "track",
+    "limit": 1
+  }
+
+  response = requests.get(endpoint, headers=header, params=params)
+  response.raise_for_status()
+  # print(token)
+  # print(response.json()['tracks']['items'][0]['id'])
+  return response.json()['tracks']['items'][0]['id']
+ 
+
