@@ -15,8 +15,37 @@ soup = BeautifulSoup(billboard100, 'html.parser')
 # top100 = soup.find_all('div', class_="chart-results-list // lrv-u-padding-t-150 lrv-u-padding-t-050@mobile-max")
 top100 = soup.find_all('div', class_="o-chart-results-list-row-container")
 counter = 1
-for i in top100:
-  title = i.find('h3')
-  print(counter, end=".")
-  print(title.text.strip())
-  counter += 1
+
+def print_top100():
+  for i in top100:
+    title = i.find('h3')
+    print(counter, end=".")
+    print(title.text.strip())
+    counter += 1
+
+
+def add_top100():
+  for i in top100:
+    title = i.find('h3')
+    print(counter, end=".")
+    print(title.text.strip())
+    counter += 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 989c4215b8c5487f87999705299f1f4b
+# 4b55f515f87e4005a618bd8ea283a3ee
