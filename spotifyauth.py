@@ -3,8 +3,8 @@ from spotipy.oauth2 import SpotifyOAuth
 import requests
 import spotifydev
 # https://github.com/spotipy-dev/spotipy/blob/2.22.1/TUTORIAL.md
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="",
-                                               client_secret="",
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="989c4215b8c5487f87999705299f1f4b",
+                                               client_secret="4b55f515f87e4005a618bd8ea283a3ee",
                                                redirect_uri="http://example.com",
                                                scope="playlist-modify-public"))
 user_id = "1124705280"
@@ -36,7 +36,8 @@ def create_playlist():
 
 def add_tracks():
     tracks = spotifydev.get_tracks("Disturbia")
-    sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",tracks, position=None )
+    sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",[tracks])
+    print(tracks)
 
 add_tracks()
 
