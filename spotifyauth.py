@@ -3,8 +3,8 @@ from spotipy.oauth2 import SpotifyOAuth
 import requests
 import spotifydev
 # https://github.com/spotipy-dev/spotipy/blob/2.22.1/TUTORIAL.md
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="989c4215b8c5487f87999705299f1f4b",
-                                               client_secret="4b55f515f87e4005a618bd8ea283a3ee",
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="",
+                                               client_secret="",
                                                redirect_uri="http://example.com",
                                                scope="playlist-modify-public"))
 user_id = "1124705280"
@@ -34,12 +34,23 @@ def create_playlist():
     urn = 'spotify:artist:3jOstUTkEu2JkjvRdBA5Gu'
     print(sp.user_playlist_create(user_id, "spotip pl", public=True, collaborative=False, description='test spotipy playlist'))
 
-def add_tracks():
+def add_tracks_test():
     tracks = spotifydev.get_tracks("Disturbia")
     sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",[tracks])
     print(tracks)
 
-add_tracks()
+
+def add_tracks(tracks):
+    track_ids = list(map(spotifydev.get_tracks, tracks))  # ids 
+    # lambda with map to try
+    sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",[track_ids])
+    print(tracks)
+
+
+def map_test(tracks):
+    track_ids = list(map(spotifydev.get_tracks, tracks))
+    print(track_ids)
+
 
 def get_test():
     for i in sp.current_user_playlists(limit=50, offset=0)['items']:
