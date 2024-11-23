@@ -9,8 +9,8 @@ def get_auth():
   }
   params = {
     "grant_type":"client_credentials",
-    "client_id":"",
-    "client_secret":""
+    "client_id":"989c4215b8c5487f87999705299f1f4b",
+    "client_secret":"4b55f515f87e4005a618bd8ea283a3ee"
   }
   response = requests.post(url="https://accounts.spotify.com/api/token", headers=header, data=params)
   # print(response.json())
