@@ -30,26 +30,28 @@ def get_user_id():
     print(response.json())
 
 def create_playlist():
-    
     urn = 'spotify:artist:3jOstUTkEu2JkjvRdBA5Gu'
     print(sp.user_playlist_create(user_id, "spotip pl", public=True, collaborative=False, description='test spotipy playlist'))
 
-def add_tracks_test():
-    tracks = spotifydev.get_tracks("Disturbia")
-    sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",[tracks])
-    print(tracks)
-
-
 def add_tracks(tracks):
     track_ids = list(map(spotifydev.get_tracks, tracks))  # ids 
-    # lambda with map to try
-    sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",[track_ids])
-    print(tracks)
-
-
-def map_test(tracks):
-    track_ids = list(map(spotifydev.get_tracks, tracks))
     print(track_ids)
+    # map(add_tracks_inner, track_ids)
+    for i in track_ids:
+        add_tracks_inner(i) 
+
+def add_tracks_inner(track):
+    # lambda with map to try
+    sp.playlist_add_items("765JkJ9MWbmuPIS3xthnOl",[track])
+    
+def remove_tracks(tracks):
+    for i in tracks:
+        sp.playlist_remove_all_occurrences_of_items("765JkJ9MWbmuPIS3xthnOl",i)
+
+def get_tracks():
+    sp.playlist_items("765JkJ9MWbmuPIS3xthnOl", fields=None, limit=100, offset=0, market=None, additional_types=('track',))
+
+
 
 
 def get_test():
@@ -57,7 +59,6 @@ def get_test():
         print(i)
     print(sp.playlist("765JkJ9MWbmuPIS3xthnOl", fields=None, market=None, additional_types=('track',)))
 
-# user id is required in the next steps
 
 def read_cache():
     print(sp.current_user_top_tracks)
