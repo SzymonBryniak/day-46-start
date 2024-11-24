@@ -14,7 +14,7 @@ soup = BeautifulSoup(billboard100, 'html.parser')
 
 # top100 = soup.find_all('div', class_="chart-results-list // lrv-u-padding-t-150 lrv-u-padding-t-050@mobile-max")
 top100 = soup.find_all('div', class_="o-chart-results-list-row-container")
-counter = 1
+counter = 1 # enumerate
 
 def print_top100():
   for i in top100:
@@ -35,7 +35,7 @@ def add_top100():
 trackstoadd = add_top100()
 # spotifyauth.add_tracks(trackstoadd)
 
-spotifyauth.map_test(trackstoadd)
+spotifyauth.add_tracks(trackstoadd)
 
 
 
