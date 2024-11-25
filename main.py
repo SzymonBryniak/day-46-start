@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import spotipy
 import spotifyauth
+import spotifydev
 question = input('Which year do you want to travel to? Type the date in this format YYYY-MM-DD: ')
 question1 = '2007-08-30'
 header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0"}
@@ -31,16 +32,16 @@ def add_top100():
     tracks.append(title.text.strip())
 
   return tracks
-  
-trackstoadd = add_top100()
+# adding tacks works
+# trackstoadd = add_top100()
+
+
+# spotifyauth.get_tracks()
+spotifyauth.get_playlist_items()
 # spotifyauth.add_tracks(trackstoadd)
 
-spotifyauth.add_tracks(trackstoadd)
 
-
-
-
-
+#2004-08-30
 
 
 
