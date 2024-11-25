@@ -17,7 +17,6 @@ def get_auth():
   return response.json()['access_token']
 
 
-
 def get_tracks(song):
   # curl --request GET \
   # --url 'https://api.spotify.com/v1/search?q=Get+Ur+Freak+On&type=track&limit=1' \
@@ -40,4 +39,20 @@ def get_tracks(song):
   # print(response.json()['tracks']['items'][0]['id'])
   return response.json()['tracks']['items'][0]['id']
  
+def get_playlist_tracks():
+  token = get_auth()
+  endpoint = "https://api.spotify.com/v1/playlists/765JkJ9MWbmuPIS3xthnOl/tracks"
+  header = {
+    'Authorization': f"Bearer {token}"
+  }
+  params = {
+    "limit": 100
+  }
+  response = requests.get(url=endpoint, headers=header, params=params)
+  response.raise_for_status()
+  print(response.json())
+
+  # curl --request GET \
+  # --url 'https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n/tracks?limit=1000' \
+  # --header 'Authorization: Bearer 1POdFZRZbvb...qqillRxMr2z'
 
