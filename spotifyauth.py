@@ -3,8 +3,8 @@ from spotipy.oauth2 import SpotifyOAuth
 import requests
 import spotifydev
 # https://github.com/spotipy-dev/spotipy/blob/2.22.1/TUTORIAL.md
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="",
-                                               client_secret="",
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="989c4215b8c5487f87999705299f1f4b",
+                                               client_secret="4b55f515f87e4005a618bd8ea283a3ee",
                                                redirect_uri="http://example.com",
                                                scope="playlist-modify-public"))
 user_id = "1124705280"
@@ -48,11 +48,6 @@ def remove_tracks(tracks):
     for i in tracks:
         sp.playlist_remove_all_occurrences_of_items("765JkJ9MWbmuPIS3xthnOl",i)
 
-def get_tracks():
-    sp.playlist_items("765JkJ9MWbmuPIS3xthnOl", fields=None, limit=100, offset=0, market=None, additional_types=('track',))
-
-
-
 
 def get_test():
     for i in sp.current_user_playlists(limit=50, offset=0)['items']:
@@ -67,4 +62,16 @@ def read_cache():
        e_cache = eval(cache.read())
        print(e_cache['access_token'])
 
+def get_playlist_items():
+    results = sp.user_playlist(user_id, "765JkJ9MWbmuPIS3xthnOl")
+    print(results["items"])
+#     response = sp.user_playlist_tracks(user_id,     results = sp.user_playlist(user_id, "765JkJ9MWbmuPIS3xthnOl")
+# , fields=fields, limit=100, market=market)
+#     results = response["items"]
+    # albums = results['tracks']
+    # while results['next']:
+    #     results = sp.next(results)
+    #     albums.extend(results['items'])
+    # for album in albums:
+    #     print(album['name'])
 
