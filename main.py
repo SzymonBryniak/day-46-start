@@ -32,13 +32,12 @@ def add_top100():
     tracks.append(title.text.strip())
 
   return tracks
-# adding tacks works
-# trackstoadd = add_top100()
 
+trackstoadd = add_top100()
 
 # spotifyauth.get_tracks()
-spotifyauth.get_playlist_items()
-# spotifyauth.add_tracks(trackstoadd)
+# spotifyauth.get_playlist_items()
+spotifyauth.add_tracks(trackstoadd)
 
 
 #2004-08-30
